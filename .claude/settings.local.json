@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(herd links *)",
+      "PowerShell($paths = @\\(\"$env:LOCALAPPDATA\\\\Programs\\\\Herd\\\\Herd.exe\", \"$env:ProgramFiles\\\\Herd\\\\Herd.exe\", \"$env:LOCALAPPDATA\\\\Herd\\\\Herd.exe\"\\); $found = $paths | Where-Object { Test-Path $_ } | Select-Object -First 1; if \\($found\\) { Start-Process $found; \"Started: $found\" } else { \"Herd.exe not found in common locations\"; \\(Get-Command herd -ErrorAction SilentlyContinue\\).Source })",
+      "PowerShell($deadline = \\(Get-Date\\).AddSeconds\\(30\\); do { Start-Sleep -Seconds 3; $out = herd links 2>$null; } while \\(-not $? -and \\(Get-Date\\) -lt $deadline\\); $out)",
+      "PowerShell(herd parked *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://rubpey-.test\" -UseBasicParsing -TimeoutSec 15 -ErrorAction Stop; \"Status: $\\($r.StatusCode\\)\"; $r.Content.Substring\\(0, [Math]::Min\\(500, $r.Content.Length\\)\\) } catch { \"Request failed: $\\($_.Exception.Message\\)\"; if \\($_.Exception.Response\\) { \"HTTP Status: $\\([int]$_.Exception.Response.StatusCode\\)\" } })"
+    ]
+  }
+}
