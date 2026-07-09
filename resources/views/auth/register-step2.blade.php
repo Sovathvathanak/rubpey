@@ -24,7 +24,7 @@
             <div>
                 <label for="nationality" class="label">Nationality</label>
                 <select id="nationality" name="nationality" class="input" required>
-                    @foreach (['Cambodia', 'Thailand', 'Vietnam', 'Laos', 'Other'] as $nat)
+                    @foreach (['Cambodia', 'Myanmar', 'Vietnam', 'Laos', 'Other'] as $nat)
                         <option value="{{ $nat }}" @selected(old('nationality', $data['nationality'] ?? 'Cambodia') === $nat)>{{ $nat }}</option>
                     @endforeach
                 </select>
