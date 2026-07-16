@@ -4,13 +4,14 @@
 @section('page-title', 'RubPey Management')
 
 @section('content')
-    <h2 class="text-3xl font-bold text-navy-900">Initiate Secure Transfer</h2>
+    <h2 class="text-2xl font-bold text-navy-900 sm:text-3xl">Initiate Secure Transfer</h2>
     <p class="mb-6 mt-1 text-sm text-slate-500">Configure your transaction details. All transfers are protected.</p>
 
     @include('partials.transfer-steps', ['current' => 1])
 
     @if ($errors->any())
-        <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+        <div class="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+            <svg class="mt-0.5 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>
             {{ $errors->first() }}
         </div>
     @endif
@@ -19,7 +20,7 @@
         {{-- Source account --}}
         <div class="card p-6">
             <div class="flex items-start gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100 text-brand-600">
+                <span class="icon-tile h-10 w-10">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" /></svg>
                 </span>
                 <div>
@@ -33,8 +34,8 @@
                 <div class="mt-5 space-y-2.5">
                     @forelse ($accounts as $account)
                         <label class="flex cursor-pointer items-center justify-between rounded-xl border-2 px-4 py-3.5 transition
-                            {{ ($source['account_id'] ?? null) === $account['account_id'] ? 'border-brand-500 bg-brand-50' : 'border-slate-200 bg-white hover:border-brand-200' }}
-                            {{ $account['status'] !== 'Active' ? 'opacity-50' : '' }}">
+                            {{ ($source['account_id'] ?? null) === $account['account_id'] ? 'border-brand-500 bg-brand-50 shadow-sm' : 'border-slate-200 bg-white hover:border-brand-300 hover:bg-brand-50/40' }}
+                            {{ $account['status'] !== 'Active' ? 'cursor-not-allowed opacity-50' : '' }}">
                             <span class="flex items-center gap-3">
                                 <input type="radio" name="source_account_id" value="{{ $account['account_id'] }}"
                                        class="h-4 w-4 border-slate-300 text-brand-600 focus:ring-brand-500"
@@ -90,12 +91,14 @@
         <h3 class="mb-4 border-t border-slate-200 pt-6 text-lg font-bold text-navy-900">Recent Transfers</h3>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
             @forelse ($recentTransfers as $tx)
-                <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div class="card p-4 transition hover:shadow-md">
                     <div class="flex items-start justify-between">
                         <span class="amount text-base text-slate-900">${{ number_format(abs($tx['amount']), 2) }}</span>
-                        <svg class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                        </span>
                     </div>
-                    <p class="mt-1 text-xs text-slate-500">{{ str_replace('Transfer to ', 'To: ', explode(' — ', $tx['description'])[0]) }}</p>
+                    <p class="mt-1 text-xs font-medium text-slate-600">{{ str_replace('Transfer to ', 'To: ', explode(' — ', $tx['description'])[0]) }}</p>
                     <p class="mt-1 font-mono text-[10px] text-slate-400">{{ \Carbon\Carbon::parse($tx['transfer_date'])->format('M d, Y H:i') }}</p>
                 </div>
             @empty

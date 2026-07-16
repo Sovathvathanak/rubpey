@@ -21,7 +21,7 @@
         <form method="POST" action="{{ route('transfers.details.post') }}" class="p-8">
             @csrf
             {{-- Source summary --}}
-            <div class="mb-6 flex items-center justify-between rounded-lg bg-slate-100 px-5 py-4">
+            <div class="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-100 bg-brand-50/50 px-5 py-4">
                 <div>
                     <span class="stat-label">Source Account</span>
                     <p class="mt-0.5 text-sm font-semibold text-navy-900">{{ $source['account_name'] }}</p>

@@ -7,4 +7,4 @@
         default => 'pill-gray',
     };
 @endphp
-<span class="{{ $pillClass }}">{{ $status }}</span>
+<span class="{{ $pillClass }}"><span class="pill-dot"></span>{{ $status }}</span>

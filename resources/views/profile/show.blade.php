@@ -5,19 +5,26 @@
 
 @section('content')
     {{-- Header --}}
-    <div class="mb-6 flex items-center justify-between">
-        <div class="flex items-center gap-5">
-            <span class="relative">
-                <span class="flex h-20 w-20 items-center justify-center rounded-xl border border-slate-200 bg-white text-brand-600 shadow-sm">
-                    <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+    <div class="card mb-6 overflow-hidden">
+        <div class="h-24 bg-gradient-to-r from-navy-900 via-navy-800 to-brand-700"></div>
+        <div class="flex flex-wrap items-end justify-between gap-4 px-6 pb-6 sm:px-8">
+            <div class="flex flex-wrap items-end gap-5">
+                <span class="relative -mt-10">
+                    <span class="flex h-20 w-20 items-center justify-center rounded-2xl border-4 border-white bg-brand-50 text-2xl font-bold text-brand-600 shadow">
+                        {{ strtoupper(mb_substr($customer['first_name'], 0, 1) . mb_substr($customer['last_name'], 0, 1)) }}
+                    </span>
+                    <span class="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-white bg-emerald-500"></span>
                 </span>
-            </span>
-            <div>
-                <h2 class="text-3xl font-bold text-navy-900">{{ $customer['first_name'] }} {{ $customer['last_name'] }}</h2>
-                <p class="mt-0.5 text-sm text-slate-500">ID: {{ $customer['customer_code'] }}</p>
+                <div class="pt-4">
+                    <h2 class="text-2xl font-bold text-navy-900 sm:text-3xl">{{ $customer['first_name'] }} {{ $customer['last_name'] }}</h2>
+                    <p class="mt-0.5 font-mono text-sm text-slate-500">ID: {{ $customer['customer_code'] }}</p>
+                </div>
             </div>
+            <a href="{{ route('settings.index') }}" class="btn-outline-brand">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>
+                Edit Profile
+            </a>
         </div>
-        <a href="{{ route('settings.index') }}" class="btn-outline-brand">Edit Profile</a>
     </div>
 
     {{-- Personal details --}}
@@ -57,7 +64,7 @@
     {{-- Contact info --}}
     <div class="card p-8">
         <h3 class="flex items-center gap-2 border-b border-slate-100 pb-4 text-base font-bold text-navy-900">
-            <svg class="h-5 w-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" /></svg>
+            <svg class="h-5 w-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
             Contact Information
         </h3>
         <div class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-3">

@@ -4,7 +4,7 @@
 @section('page-title', 'Settings & Preferences')
 
 @section('content')
-    <h2 class="text-3xl font-bold text-navy-900">Account Management</h2>
+    <h2 class="text-2xl font-bold text-navy-900 sm:text-3xl">Account Management</h2>
     <p class="mb-8 mt-1 text-sm text-slate-500">Review and update your personal credentials and system configuration.</p>
 
     <div class="card max-w-2xl overflow-hidden">

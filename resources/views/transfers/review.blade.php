@@ -16,7 +16,7 @@
         <div class="card p-8 lg:col-span-2">
             <div class="flex items-center justify-between border-b border-slate-100 pb-5">
                 <h2 class="text-lg font-bold text-navy-900">Transfer Summary</h2>
-                <span class="pill-green">Awaiting Confirmation</span>
+                <span class="pill-amber"><span class="pill-dot"></span>Awaiting Confirmation</span>
             </div>
 
             <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -77,12 +77,19 @@
             <form method="POST" action="{{ route('transfers.confirm') }}" class="mt-4">
                 @csrf
                 <label for="pin" class="label">Enter PIN Number</label>
-                <input id="pin" name="pin" type="password" inputmode="numeric" placeholder="••••••" class="input text-center font-mono tracking-[0.5em]" required autofocus>
+                <input id="pin" name="pin" type="password" inputmode="numeric" placeholder="••••••" class="input text-center font-mono text-lg tracking-[0.5em]" required autofocus>
                 @error('pin')<p class="mt-2 text-xs text-red-600">{{ $message }}</p>@enderror
 
-                <button type="submit" class="btn mt-5 w-full bg-emerald-800 py-3 text-white hover:bg-emerald-700">Confirm</button>
+                <button type="submit" class="btn mt-5 w-full bg-emerald-600 py-3 text-white shadow-sm hover:bg-emerald-700">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                    Confirm Transfer
+                </button>
             </form>
-            <a href="{{ route('transfers.details') }}" class="btn mt-3 w-full border border-red-300 bg-white text-red-600 hover:bg-red-50">Cancel</a>
+            <a href="{{ route('transfers.details') }}" class="btn mt-3 w-full border border-red-200 bg-white text-red-600 hover:border-red-300 hover:bg-red-50">Cancel</a>
+            <p class="mt-4 flex items-center justify-center gap-1.5 text-center text-[11px] text-slate-400">
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+                Your PIN is encrypted and never stored
+            </p>
         </div>
     </div>
 @endsection

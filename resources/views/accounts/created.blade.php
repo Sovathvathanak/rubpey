@@ -4,7 +4,8 @@
 @section('page-title', 'Account')
 
 @section('content')
-    <div class="rounded-xl bg-navy-900 p-8 shadow-lg">
+    <div class="relative mx-auto max-w-2xl overflow-hidden rounded-2xl bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 p-8 shadow-lg">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand-500/20 blur-2xl"></div>
         <span class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
         </span>
