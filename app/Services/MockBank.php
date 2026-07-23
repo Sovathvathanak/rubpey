@@ -42,6 +42,8 @@ class MockBank
             [3, 'Sovanmony', 'Reaksmey', '003344556', '+855 77 889 001', 'sovanmony@gmail.com', 'Cambodia', '1995-01-21', 'National Road 5, Battambang'],
             [4, 'Sovathvathanak', 'Meung', '004455667', '+855 10 234 567', 'sovathvathanak@gmail.com', 'Cambodia', '2001-11-30', 'St. 2004, Sen Sok, Phnom Penh'],
             [5, 'Vinchhou', 'Phea', '005566778', '+855 69 777 888', 'vinchhou@gmail.com', 'Cambodia', '1988-03-17', 'Riverside, Siem Reap'],
+            [6, 'Kimlong', 'Oeun', '006677889', '+855 15 998 001', 'kimlong.oeun@gmail.com', 'Cambodia', '1993-07-08', 'St. 320, Chamkarmon, Phnom Penh'],
+            [7, 'Tangkea', 'Suy', '007788990', '+855 88 445 112', 'tangkea.suy@gmail.com', 'Cambodia', '1985-02-25', 'Wat Bo Road, Siem Reap'],
         ];
         foreach ($seedCustomers as [$id, $first, $last, $nid, $phone, $email, $nat, $dob, $address]) {
             $customers[$id] = [
@@ -70,6 +72,10 @@ class MockBank
             [4, 3, 'Savings', '001-3000001', 1500000.00, 'Active', 'KHR', 'Riel Savings'],
             [5, 4, 'Checking', '001-4000001', 5600.75, 'Active', 'USD', 'Sovathvathanak Checking'],
             [6, 5, 'Savings', '001-5000001', 940.00, 'Frozen', 'USD', 'Phea Savings'],
+            [7, 6, 'Savings', '001-6000001', 3400.25, 'Active', 'USD', 'Kimlong Savings'],
+            [8, 6, 'Checking', '001-6000002', 780.00, 'Active', 'USD', 'Kimlong Checking'],
+            [9, 7, 'Savings', '001-7000001', 2200000.00, 'Active', 'KHR', 'Tangkea Riel Savings'],
+            [10, 7, 'Checking', '001-7000002', 610.40, 'Active', 'USD', 'Tangkea Checking'],
         ];
         foreach ($seedAccounts as [$id, $cid, $type, $number, $balance, $status, $currency, $name]) {
             $accounts[$id] = [
@@ -88,6 +94,9 @@ class MockBank
             1 => ['transfer_id' => 1, 'from_account_id' => 1, 'to_account_id' => 3, 'amount' => 250.00, 'reference_code' => 'TRX-88910-KLA', 'transfer_date' => $now->copy()->subDays(3)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
             2 => ['transfer_id' => 2, 'from_account_id' => null, 'to_account_id' => 2, 'amount' => 1200.00, 'reference_code' => 'TRX-88772-BAQ', 'transfer_date' => $now->copy()->subDays(5)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
             3 => ['transfer_id' => 3, 'from_account_id' => 2, 'to_account_id' => 5, 'amount' => 500.00, 'reference_code' => 'TRX-88905-CXD', 'transfer_date' => $now->copy()->subDays(1)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            4 => ['transfer_id' => 4, 'from_account_id' => 8, 'to_account_id' => 3, 'amount' => 300.00, 'reference_code' => 'TRX-89010-DFE', 'transfer_date' => $now->copy()->subDays(2)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            5 => ['transfer_id' => 5, 'from_account_id' => null, 'to_account_id' => 9, 'amount' => 500000.00, 'reference_code' => 'TRX-89044-GHK', 'transfer_date' => $now->copy()->subDays(4)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            6 => ['transfer_id' => 6, 'from_account_id' => 10, 'to_account_id' => 1, 'amount' => 150.00, 'reference_code' => 'TRX-89100-JKL', 'transfer_date' => $now->copy()->subHours(12)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
         ];
 
         $transactions = [
@@ -96,11 +105,20 @@ class MockBank
             3 => ['transaction_id' => 3, 'account_id' => 2, 'transfer_id' => 2, 'amount' => 1200.00, 'description' => 'Deposit', 'transfer_date' => $now->copy()->subDays(5)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
             4 => ['transaction_id' => 4, 'account_id' => 2, 'transfer_id' => 3, 'amount' => -500.00, 'description' => 'Transfer to Sovathvathanak Meung', 'transfer_date' => $now->copy()->subDays(1)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
             5 => ['transaction_id' => 5, 'account_id' => 5, 'transfer_id' => 3, 'amount' => 500.00, 'description' => 'Transfer from Layhout Tang', 'transfer_date' => $now->copy()->subDays(1)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            6 => ['transaction_id' => 6, 'account_id' => 8, 'transfer_id' => 4, 'amount' => -300.00, 'description' => 'Transfer to Kimkuy Ngo', 'transfer_date' => $now->copy()->subDays(2)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            7 => ['transaction_id' => 7, 'account_id' => 3, 'transfer_id' => 4, 'amount' => 300.00, 'description' => 'Transfer from Kimlong Oeun', 'transfer_date' => $now->copy()->subDays(2)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            8 => ['transaction_id' => 8, 'account_id' => 9, 'transfer_id' => 5, 'amount' => 500000.00, 'description' => 'Deposit', 'transfer_date' => $now->copy()->subDays(4)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            9 => ['transaction_id' => 9, 'account_id' => 10, 'transfer_id' => 6, 'amount' => -150.00, 'description' => 'Transfer to Layhout Tang', 'transfer_date' => $now->copy()->subHours(12)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
+            10 => ['transaction_id' => 10, 'account_id' => 1, 'transfer_id' => 6, 'amount' => 150.00, 'description' => 'Transfer from Tangkea Suy', 'transfer_date' => $now->copy()->subHours(12)->format('Y-m-d H:i:s'), 'status' => 'Completed'],
         ];
 
         $activities = [
             1 => ['activity_id' => 1, 'customer_id' => 1, 'title' => 'Incoming Wire Transfer', 'body' => "Received \$1,200.00 deposit into 'Daily Checking'.", 'icon' => 'transfer', 'date' => $now->copy()->subDays(5)->format('Y-m-d H:i:s'), 'read' => false],
             2 => ['activity_id' => 2, 'customer_id' => 1, 'title' => 'Password Successfully Changed', 'body' => 'Your PIN was updated. This action requires no further verification.', 'icon' => 'security', 'date' => $now->copy()->subDays(2)->format('Y-m-d H:i:s'), 'read' => false],
+            3 => ['activity_id' => 3, 'customer_id' => 6, 'title' => 'Account Created', 'body' => 'Welcome to RubPey! Your customer profile was created successfully.', 'icon' => 'security', 'date' => $now->copy()->subDays(6)->format('Y-m-d H:i:s'), 'read' => true],
+            4 => ['activity_id' => 4, 'customer_id' => 7, 'title' => 'Account Created', 'body' => 'Welcome to RubPey! Your customer profile was created successfully.', 'icon' => 'security', 'date' => $now->copy()->subDays(3)->format('Y-m-d H:i:s'), 'read' => true],
+            5 => ['activity_id' => 5, 'customer_id' => 2, 'title' => 'Incoming Transfer', 'body' => "Received \$300.00 from Kimlong Oeun (Ref TRX-89010-DFE).", 'icon' => 'transfer', 'date' => $now->copy()->subDays(2)->format('Y-m-d H:i:s'), 'read' => false],
+            6 => ['activity_id' => 6, 'customer_id' => 1, 'title' => 'Incoming Transfer', 'body' => "Received \$150.00 from Tangkea Suy (Ref TRX-89100-JKL).", 'icon' => 'transfer', 'date' => $now->copy()->subHours(12)->format('Y-m-d H:i:s'), 'read' => false],
         ];
 
         $this->data = [
@@ -109,7 +127,7 @@ class MockBank
             'transfers' => $transfers,
             'transactions' => $transactions,
             'activities' => $activities,
-            'seq' => ['customer' => 6, 'account' => 7, 'transfer' => 4, 'transaction' => 6, 'activity' => 3],
+            'seq' => ['customer' => 8, 'account' => 11, 'transfer' => 7, 'transaction' => 11, 'activity' => 7],
         ];
         $this->persist();
 
